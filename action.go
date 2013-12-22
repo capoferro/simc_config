@@ -3,7 +3,7 @@ package simc_config
 import (
 	"strings"
 	"regexp"
-//	"fmt"
+	"fmt"
 )
 
 type Action struct {
@@ -29,4 +29,12 @@ func NewActionFromString(str string) *Action {
 		}
 	}
 	return action
+}
+
+func (a *Action) ToText() string {
+	options := ""
+	for k, v := range a.Options {
+		options = fmt.Sprintf("%s,%s=%s", options, k, v)
+	}
+	return fmt.Sprintf("%s%s", a.Label, options)
 }

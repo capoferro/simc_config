@@ -157,6 +157,14 @@ func Test_parseLine_Item(t *testing.T) {
 	assertEqualString(t, item.Slot, "main_hand")
 }
 
+func Test_simcConfigToText(t *testing.T) {
+	config := NewSimcConfig()
+
+	assertEqualString(t, config.ToText(), `#!/usr/bin/env simc
+
+`)
+}
+
 func Test_dequoteValue(t *testing.T) {
 	s := dequoteValue("\"omg\"")
 	if s != "omg" {

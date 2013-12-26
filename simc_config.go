@@ -96,6 +96,15 @@ func (c *SimcConfig) parseLine(line string) {
 	}
 }
 
+func (c *SimcConfig) ToText() string{
+	lines := []string{
+		"#!/usr/bin/env simc",
+		c.Character.ToText(),
+		c.ActionList.ToText()}
+	
+	return strings.Join(lines, "\n")
+}
+
 func dequoteValue(quoted string) string {
 	re := regexp.MustCompile("\"([^\"]+)\"")
 	submatch := re.FindStringSubmatch(quoted)

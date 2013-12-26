@@ -26,5 +26,4 @@ func assertEqualStringSlice(t *testing.T, a []string, b []string) {
 			t.Error(fmt.Sprintf("'%v' should be '%v'", a, b))
 		}
 	}
-
 }

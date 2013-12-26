@@ -2,7 +2,6 @@ package simc_config
 
 import (
 	"strings"
-	"fmt"
 )
 
 type Character struct {

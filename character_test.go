@@ -18,7 +18,7 @@ func Test_CharacterToText(t *testing.T) {
 		Talents: "some_talents_other_talents",
 		Glyphs: "some_glyphs_other_glyphs",
 		Spec: "frost",
-	  Items: []*Item{&Item{Slot: "main_hand", Label: "xifeng"}}}
+	  Items: []*Item{&Item{Slot: "main_hand", Label: "xifeng"}, &Item{Slot: "off_hand", Label: "xifeng"}}}
 
 	assertEqualString(t, char.ToText(), `deathknight=Capoferro
 origin="http://origin"
@@ -32,5 +32,6 @@ talents=some_talents_other_talents
 glyphs=some_glyphs_other_glyphs
 spec=frost
 
-main_hand=xifeng`)
+main_hand=xifeng
+off_hand=xifeng`)
 }

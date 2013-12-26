@@ -4,6 +4,8 @@ import (
 	"strings"
 	"regexp"
 	"strconv"
+	"io/ioutil"
+	"path"
 	"fmt"
 )
 
@@ -103,6 +105,14 @@ func (c *SimcConfig) ToText() string{
 		c.ActionList.ToText()}
 	
 	return strings.Join(lines, "\n")
+}
+
+func (c *SimcConfig) WriteFile(filepath string) {
+	bytes := []byte(c.ToText())
+	err := ioutil.WriteFile(path.Join(filepath, fmt.Sprintf("%s.simc", c.Character.Name)), bytes, 0644)
+	if err != nil { 
+		panic(err)
+	}
 }
 
 func dequoteValue(quoted string) string {

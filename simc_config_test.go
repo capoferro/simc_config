@@ -3,6 +3,9 @@ package simc_config
 import (
 	"testing"
 	"fmt"
+	"os"
+	"io/ioutil"
+	"path"
 )
 
 func Test_parseLine_Class_1(t *testing.T) {
@@ -163,6 +166,20 @@ func Test_simcConfigToText(t *testing.T) {
 	assertEqualString(t, config.ToText(), `#!/usr/bin/env simc
 
 `)
+}
+
+func Test_writeFile(t *testing.T) {
+	tempDir, _ := ioutil.TempDir("", "Test_writeFile")
+	defer func() { os.RemoveAll(tempDir) }()
+
+	config := NewSimcConfig()
+
+	config.WriteFile(tempDir)
+	content, _ := ioutil.ReadFile(path.Join(tempDir, ".simc"))
+	assertEqualString(t, string(content), `#!/usr/bin/env simc
+
+`) // todo handle empty name
+
 }
 
 func Test_dequoteValue(t *testing.T) {

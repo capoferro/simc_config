@@ -61,5 +61,25 @@ func (i *Item) gemsToString() string {
 }
 
 func (i *Item) ToText() string {
-	return fmt.Sprintf("%s=%s,id=%d,upgrade=%d,gems=%s,enchant=%s,reforge=%s", i.Slot, i.Label, i.Id, i.Upgrade, i.gemsToString(), i.Enchant, i.Reforge)
+	elements := make([]string, 0)
+	if i.Slot != "" && i.Label != "" {
+		elements = append(elements, fmt.Sprintf("%s=%s", i.Slot, i.Label))
+	}
+	if i.Id != 0 {
+		elements = append(elements, fmt.Sprintf("id=%d", i.Id))
+	}
+	if i.Upgrade != 0 {
+		elements = append(elements, fmt.Sprintf("upgrade=%d", i.Upgrade))
+	}
+	if gems := i.gemsToString(); gems != "" {
+		elements = append(elements, fmt.Sprintf("gems=%s", gems))
+	}
+	if i.Enchant != "" {
+		elements = append(elements, fmt.Sprintf("enchant=%s", i.Enchant))
+	}
+	if i.Reforge != "" {
+		elements = append(elements, fmt.Sprintf("reforge=%s", i.Reforge))
+	}
+
+	return strings.Join(elements, ",")
 }

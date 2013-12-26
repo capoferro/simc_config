@@ -27,7 +27,7 @@ func (c *Character) AddItem(slot string, details string) {
 
 func (c *Character) ToText() string {
 	s := fmt.Sprintf
-	return strings.Join([]string{
+	lines := []string{
 		s("%s=%s", c.Class, c.Name),
 		s("origin=\"%s\"", c.Origin),
 		s("thumbnail=\"%s\"", c.Thumbnail),
@@ -38,5 +38,13 @@ func (c *Character) ToText() string {
 		s("professions=%s", c.Professions),
 		s("talents=%s", c.Talents),
 		s("glyphs=%s", c.Glyphs),
-		s("spec=%s", c.Spec)}, "\n")
+		s("spec=%s", c.Spec),
+		""}
+
+	item_lines := make([]string, len(c.Items))
+	for i, item := range c.Items {
+		item_lines[i] = item.ToText()
+	}
+
+	return strings.Join(append(lines, item_lines...), "\n")
 }

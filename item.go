@@ -4,6 +4,7 @@ import (
 	"strconv"
 	"strings"
 	"regexp"
+	"fmt"
 )
 
 type Item struct {
@@ -53,4 +54,12 @@ func NewItemFromString(slot string, str string) *Item {
 
 func gemsFromString(str string) []string {
 	return strings.Split(str, "_")
+}
+
+func (i *Item) gemsToString() string {
+	return strings.Join(i.Gems, "_")
+}
+
+func (i *Item) ToText() string {
+	return fmt.Sprintf("%s=%s,id=%d,upgrade=%d,gems=%s,enchant=%s,reforge=%s", i.Slot, i.Label, i.Id, i.Upgrade, i.gemsToString(), i.Enchant, i.Reforge)
 }

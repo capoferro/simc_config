@@ -16,3 +16,15 @@ func assertEqualInt(t *testing.T, a int, b int) {
 		t.Error(fmt.Sprintf("'%d' should be '%d'", a, b))
 	}
 }
+
+func assertEqualStringSlice(t *testing.T, a []string, b []string) {
+	if len(a) != len(b) {
+		t.Error(fmt.Sprintf("'%v' should be '%v'", a, b))
+	}
+	for i, _ := range b {
+		if a[i] != b[i] {
+			t.Error(fmt.Sprintf("'%v' should be '%v'", a, b))
+		}
+	}
+
+}
